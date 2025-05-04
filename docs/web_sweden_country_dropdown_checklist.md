@@ -1,12 +1,13 @@
-# Title: New Sweden Option in Country Dropdown (Step 3 of Sign-up)
+# New Sweden Option in Country Dropdown (Step 3 of Sign-up)
 **Purpose**: Ensure the ‘Sweden’ option was added to the “Where’s your company registered?” dropdown  
 **Scope**: Covers UI behavior, default selection, value persistence, validation errors, and correct data storage and retrieval (e.g., saving to the database and displaying in the user profile), cross-browser compatibility, mobile responsiveness, and functionality across major devices.
-Not covered: Backend validation, API calls (done on the client), localization, validation of the 'Company name' and 'How did you hear about us?' fields, analytics.
+**Not covered**: Backend validation, API calls (done on the client), localization, validation of the 'Company name' and 'How did you hear about us?' fields, analytics.
+
 **Preconditions**: User has completed Step 1 (Email, Password) and Step 2 (Name, Last Name, Phone)  
 
 ---
 
-### **Checklist Body:**
+### **Checklist**
 
 #### 1. Section title
 - **Expected Result**: The section title on Step 3 should be: *Company information*.

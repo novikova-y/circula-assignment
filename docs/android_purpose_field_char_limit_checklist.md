@@ -1,7 +1,7 @@
 # Android – Error Message for Purpose Field Character Limit  
 **Purpose**: Ensure proper validation and UI feedback when the 'Purpose' field exceeds the allowed character limit.  
 **Scope**: Covers real-time validation, UI state changes, error messages, character counter behavior, CTA button states, interaction with the 'Recently Used' (suggestions) feature, localization, Android device versions, UX, and network error handling.
-**Not covered**: Backend validation, iOS implementation, form submission for valid/invalid data unrelated to the "Purpose" field, analytics, accessibility.
+**Not covered**: iOS implementation, form submission for valid/invalid data unrelated to the "Purpose" field, analytics, accessibility. Backend validation logic is assumed to mirror frontend logic but is not tested here.
 
 **Preconditions**:  
 - User is logged into the Android app.  
@@ -105,41 +105,44 @@
 #### 27. Proceeding with the flow after entering 1000 characters
 - **Expected Result**: The CTA button should be clickable, and the user should proceed to the next screen.
 
-#### 28. Entering the purpose, going back in the flow, and returning to the 'Purpose' field
+#### 28. Submitting purpose with 1000 characters and verifying saved data in the database
+- **Expected Result**: The submission should be accepted, and the full 1000-character string should be stored correctly.
+
+#### 29. Entering the purpose, going back in the flow, and returning to the 'Purpose' field
 - **Expected Result**: The entered text should remain saved and editable.
 
-#### 29. Entering the purpose, proceeding in the flow, and returning to the 'Purpose' field
+#### 30. Entering the purpose, proceeding in the flow, and returning to the 'Purpose' field
 - **Expected Result**: The entered text should remain saved and editable.
 
-#### 30. Interaction after exceeding the character limit
+#### 31. Interaction after exceeding the character limit
 - **Expected Result**: After deleting characters to return below the limit, the user should be able to proceed without refreshing the screen.
 
-#### 31. Field remains editable at all times
+#### 32. Field remains editable at all times
 - **Expected Result**: The user should be able to continue editing even when the character count exceeds 1000.
 
-#### 32. App stability with input over 1000 characters
+#### 33. App stability with input over 1000 characters
 - **Expected Result**: The app should not crash and there should be no layout issues.
 
-#### 33. Pasting a large block of text (>1000 characters)  
+#### 34. Pasting a large block of text (>1000 characters)  
 - **Expected Result**: The error state should be triggered upon paste, and the CTA button should be disabled.
 
-#### 34. Pasting a block of text and typing additional characters (499 characters pasted)  
+#### 35. Pasting a block of text and typing additional characters (499 characters pasted)  
 - **Expected Result**: The character counter should only appear upon typing, and the CTA button should be enabled.
 
-#### 35. Pasting a block of text and typing additional characters (999 characters pasted)  
+#### 36. Pasting a block of text and typing additional characters (999 characters pasted)  
 - **Expected Result**: The error state should only be triggered upon typing, and the CTA button should become disabled.
 
-#### 36. Scrollability for long text
+#### 37. Scrollability for long text
 - **Expected Result**: The field should support scrolling, allowing the user to view and edit the entire text.
 
-#### 37. Keyboard interaction 
+#### 38. Keyboard interaction 
 - **Expected Result**: The keyboard should appear and dismiss correctly when interacting with the input field.
 
-#### 38. Cross-device consistency (Android versions, screen sizes)
+#### 39. Cross-device consistency (Android versions, screen sizes)
 - **Expected Result**: Field behavior, validation, error states, and suggestions should be consistent across devices and Android versions.
 
-#### 39. Localization
+#### 40. Localization
 - **Expected Result**: Field behavior, validation, error states, and suggestions should behave consistently across different language localizations.
 
-#### 40. Behavior during network errors
+#### 41. Behavior during network errors
 - **Expected Result**: Validation, field behavior, and error messages should work as expected even during network issues.

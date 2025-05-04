@@ -57,13 +57,12 @@ Detailed checklists for each task are stored in the docs folder.
 ### Prerequisites:
 
 - **Node.js**: Ensure you have Node.js installed on your system.
-- **Cypress**: Install Cypress for running the automated tests.
 
 ### Installation Steps:
 
 1. Clone the repository
 2. Navigate into the project directory
-3. Install the dependencies:
+3. Install the dependencies (this includes Cypress):
    `npm install`
 4. Run Cypress tests:
    `npx cypress open`

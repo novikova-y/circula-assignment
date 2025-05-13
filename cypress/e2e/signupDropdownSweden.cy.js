@@ -6,58 +6,68 @@ import { signUpStep2 } from '../support/pages/signUpStep2';
 import { signUpStep3 } from '../support/pages/signUpStep3';
 
 describe('New Sweden Option in Country Dropdown', () => {
+  let uniqueEmail, password, phoneNumber;
+
   beforeEach(() => {
-    // Generating test data
-    cy.generateEmail().then((uniqueEmail) => {
-      cy.generatePassword().then((password) => {
-        cy.generatePhoneNumber().then((phoneNumber) => {
-        // Step 1
-        signUpStep1.visit();
-        cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Start your 14-day free trial');
-        signUpStep1.acceptCookies();
-        
-        signUpStep1.fillEmailField(uniqueEmail);
-        signUpStep1.fillPasswordField(password);
-        signUpStep1.acceptTerms();
-        signUpStep1.clickSubmitButton();
+    // Generate test data before each test case
+    cy.generateEmail().then((email) => {
+      uniqueEmail = email;
+    });
 
-        // Step 2
-        cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Your contact details');
-        signUpStep2.fillFirstNameField('Yulia');
-        signUpStep2.fillLastNameField('Novikova');
-        signUpStep2.fillPhoneField(phoneNumber);
-        signUpStep2.clickSubmitButton();
+    cy.generatePassword().then((pwd) => {
+      password = pwd;
+    });
 
-        // Check Step 3 title
-        cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Company information');
-      });
+    cy.generatePhoneNumber().then((phone) => {
+      phoneNumber = phone;
+    });
+
+    cy.then(() => {
+      // Step 1 - Sign-up page
+      signUpStep1.visit();
+      cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Start your 14-day free trial');
+      signUpStep1.acceptCookies();
+
+      signUpStep1.fillEmailField(uniqueEmail);
+      signUpStep1.fillPasswordField(password);
+      signUpStep1.acceptTerms();
+      signUpStep1.clickSubmitButton();
+
+      // Step 2 - Contact details
+      cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Your contact details');
+      signUpStep2.fillFirstNameField('Yulia');
+      signUpStep2.fillLastNameField('Novikova');
+      signUpStep2.fillPhoneField(phoneNumber);
+      signUpStep2.clickSubmitButton();
+
+      // Step 3 - Company information
+      cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Company information');
     });
   });
-});
 
   it('should display Germany as a default country', () => {
+    // Verify that "Germany" is preselected in the dropdown
     cy.get('input[name="country"]').should('have.value', 'Germany');
   });
 
   it('should contain "Sweden" in the country dropdown list', () => {
-    // Check if the 'Sweden' option is available in the dropdown list
+    // Verify that the user can select "Sweden" in the dropdown
     signUpStep3.selectCountryDropdown('Sweden');
     cy.get('input[name="country"]').should('have.value', 'Sweden');
   });
 
   it('should allow form submission after selecting "Sweden"', () => {
-    // Check if user can submit the form after selecting the 'Sweden' option
+    // Submit the form successfully with "Sweden" selected
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Sweden');
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');
     signUpStep3.clickCreateAccountButton();
 
-    // Check if the account was successfully created
     cy.contains('Great! Now please verify your email').should('exist');
   });
 
   it('should show error when "Where’s your company registered?" field is empty', () => {
-    // Check if an error message appears when the 'country' field is empty
+    // Leave the country field empty and verify the error message
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Germany');
     signUpStep3.clearCountry();
@@ -67,7 +77,7 @@ describe('New Sweden Option in Country Dropdown', () => {
   });
 
   it('should have "Sweden" after navigating to Step 2 and back', () => {
-    // Check if the 'Sweden' option is saved while navigating Sign Up form
+    // Verify selected value is preserved when navigating between steps
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Sweden');
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');
@@ -78,13 +88,13 @@ describe('New Sweden Option in Country Dropdown', () => {
   });
 
   it('should allow the user to search for "Sweden" by typing "Swe" in the dropdown', () => {
-    // Check if user can search for the 'Sweden' option by typing
+    // Verify user can find "Sweden" by typing part of the name
     signUpStep3.searchCountry('Swe', 'Sweden'); 
     cy.get('input[name="country"]').should('have.value', 'Sweden');
   });
 
   it('should allow form submission after selecting country other than "Sweden"', () => {
-    // Check if user can submit the form after selecting an option other than 'Sweden'
+    // Submit the form successfully with a different country selected
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Switzerland');
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');

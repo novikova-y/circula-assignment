@@ -1,7 +1,7 @@
 # Android – Error Message for Purpose Field Character Limit  
 **Purpose**: Ensure proper validation and UI feedback when the 'Purpose' field exceeds the allowed character limit.  
 **Scope**: Covers real-time validation, UI state changes, error messages, character counter behavior, CTA button states, interaction with the 'Recently Used' (suggestions) feature, localization, Android device versions, UX, and network error handling.
-**Not covered**: iOS implementation, form submission for valid/invalid data unrelated to the "Purpose" field, analytics, accessibility. Backend validation logic is assumed to mirror frontend logic but is not tested here.
+**Not covered**: iOS and web implementation, form submission for valid/invalid data unrelated to the "Purpose" field, analytics, accessibility. Backend validation logic is assumed to mirror frontend logic but is not tested here.
 
 **Preconditions**:  
 - User is logged into the Android app.  

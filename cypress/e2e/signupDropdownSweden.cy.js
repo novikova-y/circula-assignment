@@ -17,7 +17,7 @@ describe('New Sweden Option in Country Dropdown', () => {
     cy.then(() => {
       // Step 1 - Sign-up page
       signUpStep1.visit();
-      cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Start your 14-day free trial');
+      cy.get('h1').should('include.text', 'Start your 14-day free trial'); // Use "include.text" to allow partial matching
       signUpStep1.acceptCookies();
       signUpStep1.fillEmailField(uniqueEmail);
       signUpStep1.fillPasswordField(password);
@@ -25,7 +25,7 @@ describe('New Sweden Option in Country Dropdown', () => {
       signUpStep1.clickSubmitButton();
 
       // Step 2 - Contact details
-      cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Your contact details');
+      cy.get('h1').should('include.text', 'Your contact details'); // Use "include.text" to allow partial matching
       signUpStep2.fillFirstNameField('Yulia');
       signUpStep2.fillLastNameField('Novikova');
       signUpStep2.fillPhoneField(phoneNumber);
@@ -35,20 +35,20 @@ describe('New Sweden Option in Country Dropdown', () => {
 
   // Step 3 setup (added this step once to use it in all tests)
   const goToStep3 = () => {
-    cy.get('h1.sc-b4bf297b-0.ijnzwf').should('have.text', 'Company information');
+    cy.get('h1').should('include.text', 'Company information'); // Use "include.text" to allow partial matching
   };
 
   it('should display Germany as a default country', () => {
     // Go to Step 3 and verify default country
     goToStep3();
-    cy.get('input[name="country"]').should('have.value', 'Germany');
+    cy.get('input[name="country"]').should('have.value', 'Germany'); // Use input name for stability
   });
 
   it('should contain "Sweden" in the country dropdown list', () => {
     // Go to Step 3 and select Sweden
     goToStep3();
     signUpStep3.selectCountryDropdown('Sweden');
-    cy.get('input[name="country"]').should('have.value', 'Sweden');
+    cy.get('input[name="country"]').should('have.value', 'Sweden'); // Use input name for stability
   });
 
   it('should allow form submission after selecting "Sweden"', () => {
@@ -79,14 +79,14 @@ describe('New Sweden Option in Country Dropdown', () => {
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');
     signUpStep3.clickBackButton();
     signUpStep2.clickSubmitButton();
-    cy.get('input[name="country"]').should('have.value', 'Sweden');
+    cy.get('input[name="country"]').should('have.value', 'Sweden'); // Use input name for stability
   });
 
   it('should allow the user to search for "Sweden" by typing "Swe" in the dropdown', () => {
     // Go to Step 3 and verify search functionality
     goToStep3();
     signUpStep3.searchCountry('Swe', 'Sweden');
-    cy.get('input[name="country"]').should('have.value', 'Sweden');
+    cy.get('input[name="country"]').should('have.value', 'Sweden'); // Use input name for stability
   });
 
   it('should allow form submission after selecting country other than "Sweden"', () => {

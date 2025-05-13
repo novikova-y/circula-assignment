@@ -51,7 +51,7 @@ describe('New Sweden Option in Country Dropdown', () => {
   });
 
   it('should contain "Sweden" in the country dropdown list', () => {
-    // Verify that the user can select "Sweden" in the dropdown
+    // Ensure that "Sweden" is available in the dropdown and can be selected
     signUpStep3.selectCountryDropdown('Sweden');
     cy.get('input[name="country"]').should('have.value', 'Sweden');
   });
@@ -77,7 +77,7 @@ describe('New Sweden Option in Country Dropdown', () => {
   });
 
   it('should have "Sweden" after navigating to Step 2 and back', () => {
-    // Verify selected value is preserved when navigating between steps
+    // Verify that the "Sweden" selection is preserved when navigating between steps
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Sweden');
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');
@@ -88,13 +88,13 @@ describe('New Sweden Option in Country Dropdown', () => {
   });
 
   it('should allow the user to search for "Sweden" by typing "Swe" in the dropdown', () => {
-    // Verify user can find "Sweden" by typing part of the name
-    signUpStep3.searchCountry('Swe', 'Sweden'); 
+    // Verify that the user can search for "Sweden" by typing part of the name
+    signUpStep3.searchCountry('Swe', 'Sweden');
     cy.get('input[name="country"]').should('have.value', 'Sweden');
   });
 
-  it('should allow form submission after selecting country other than "Sweden"', () => {
-    // Submit the form successfully with a different country selected
+  it('should allow form submission after selecting a country other than "Sweden"', () => {
+    // Submit the form successfully with a country other than "Sweden" selected
     signUpStep3.fillOrganizationNameField('Yulia');
     signUpStep3.selectCountryDropdown('Switzerland');
     signUpStep3.selectChannelDropdown('Social Media (LinkedIn, Instagram, etc.)');
